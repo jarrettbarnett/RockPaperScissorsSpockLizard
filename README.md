@@ -49,3 +49,5 @@ or if the game is over:
 ### Reference:
 #### getLastPlay()
 Returns the last play that was performed. 
+#### restart()
+Restarts the game
