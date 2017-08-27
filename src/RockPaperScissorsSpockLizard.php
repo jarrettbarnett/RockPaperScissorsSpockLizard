@@ -55,6 +55,7 @@ class RockPaperScissorsSpockLizard {
     /**
      * Set Rounds
      * @param $rounds
+     * @return $this
      * @throws \Jarrett\RockPaperScissorsSpockLizardException
      */
     public function setRounds($rounds)
@@ -65,6 +66,8 @@ class RockPaperScissorsSpockLizard {
         }
 
         $this->rounds = (int) $rounds;
+
+        return $this;
     }
 
     /**
@@ -74,5 +77,14 @@ class RockPaperScissorsSpockLizard {
     public function getRounds()
     {
         return $this->rounds;
+    }
+
+    /**
+     * Restart Game
+     */
+    public function restart() {
+        $this->setRounds(0);
+
+        return $this;
     }
 }

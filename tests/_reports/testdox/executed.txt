@@ -1,3 +1,4 @@
 RockPaperScissorsSpockLizardTest\RockPaperScissorsSpockLizard
  [x] Can set and get rounds
+ [x] Can restart the game
 
