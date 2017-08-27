@@ -1,0 +1,3 @@
+RockPaperScissorsSpockLizardTest\RockPaperScissorsSpockLizard
+ [x] Can set and get rounds
+
