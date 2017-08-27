@@ -10,7 +10,7 @@ or use without composer
 
     require 'src/RockPaperScissorsSpockLizard.php';
     
-Basic Example:
+### Basic Example:
     
     $game = new RockpaperScissorsSpockLizard();
     $game->setRounds(3);
@@ -35,7 +35,7 @@ or if the game is over:
 
     $final = $game->won();
     
-Advanced Example:
+### Advanced Example:
 
     $game = new RockpaperScissorsSpockLizard();
     $game->setRounds(3);
@@ -45,4 +45,7 @@ Advanced Example:
     $round3 = $game->playLizard;
     
     echo $game->won() ? 'Congrats, you won!' : 'So sad, you lost!';
-    
+        
+### Reference:
+#### getLastPlay()
+Returns the last play that was performed. 
