@@ -1,0 +1,17 @@
+{
+    "name": "jarrett/rockpaperscissorsspocklizard",
+    "description": "Based on a game created by Sam Kass and Karen Bryla and made popular by \"Big Bang Theory\"",
+    "type": "library",
+    "require-dev": {
+        "phpunit/phpunit": "^6.3",
+        "phpunit/php-code-coverage": "^5.2",
+        "satooshi/php-coveralls": "^1.0"
+    },
+    "authors": [
+        {
+            "name": "Jarrett Barnett",
+            "email": "hello@jarrettbarnett.com"
+        }
+    ],
+    "require": {}
+}
