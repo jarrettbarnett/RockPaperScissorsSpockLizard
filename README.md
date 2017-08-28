@@ -54,6 +54,10 @@ Set the number of rounds for this game.
 ###### $number _integer_
 * The maximum number of rounds before a winner is chosen
 
+###### $lock _bool_
+* If _true_, don't allow the number of rounds to change for this game
+* If _false_ (default), the maximum number of rounds can be changed during the game, even after a winner is determined.  
+
 #### getLastPlay()
 Returns the last play that was performed. 
 

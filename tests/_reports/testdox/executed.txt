@@ -8,4 +8,6 @@ RockPaperScissorsSpockLizardTest\RockPaperScissorsSpockLizard
  [x] Can make a play
  [x] Can make a play via magic
  [x] Magic play fails for bad plays
+ [x] Exception thrown for set rounds when locked
+ [x] Exception thrown for invalid type for set round lock
 

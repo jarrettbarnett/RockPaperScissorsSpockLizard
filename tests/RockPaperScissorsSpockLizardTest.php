@@ -106,4 +106,20 @@ class RockPaperScissorsSpockLizardTest extends TestCase
         
         $this->assertEmpty($name);
     }
+    
+    /** @test */
+    public function exception_thrown_for_set_rounds_when_locked()
+    {
+        $this->expectException(RockPaperScissorsSpockLizardException::class);
+        $this->game->restart();
+        $this->game->setRounds(5, true);
+        $this->game->setRounds(19);
+    }
+    
+    /** @test */
+    public function exception_thrown_for_invalid_type_for_set_round_lock()
+    {
+        $this->expectException(RockPaperScissorsSpockLizardException::class);
+        $this->game->setRounds(5, 'some value');
+    }
 }

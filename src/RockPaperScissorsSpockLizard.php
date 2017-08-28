@@ -56,26 +56,43 @@ class RockPaperScissorsSpockLizard {
      * @var $rounds
      */
     private $rounds = false;
+    
+    /**
+     * Lock rounds from changing?
+     * @var $rounds_lock
+     */
+    private $rounds_lock;
 
     /**
      * The last played move
      * @var $last_play
      */
     private $last_play = false;
-
+    
     /**
      * Set Rounds
+     *
      * @param $rounds
+     * @param bool $lock
      * @return $this
      * @throws \Jarrett\RockPaperScissorsSpockLizardException
      */
-    public function setRounds($rounds)
+    public function setRounds($rounds, $lock = false)
     {
-        if (!is_numeric($rounds))
+        if ($this->rounds_lock === true)
         {
-            throw new RockPaperScissorsSpockLizardException('Invalid value supplied for setRounds()');
+            throw new RockPaperScissorsSpockLizardException('The ability to set rounds has been locked for this game');
         }
-
+        
+        if (!is_numeric($rounds)) {
+            throw new RockPaperScissorsSpockLizardException('Invalid value supplied for setRounds().');
+        }
+        
+        if (!is_bool($lock)) {
+            throw new RockPaperScissorsSpockLizardException('Lock parameter must be a boolean.');
+        }
+        
+        $this->rounds_lock = (bool) $lock;
         $this->rounds = (int) $rounds;
 
         return $this;
@@ -107,8 +124,7 @@ class RockPaperScissorsSpockLizard {
      */
     public function play($move)
     {
-        if (empty($move))
-        {
+        if (empty($move)) {
             throw new RockPaperScissorsSpockLizardException('Move parameter cannot be empty for play()');
         }
 
