@@ -1,4 +1,11 @@
 RockPaperScissorsSpockLizardTest\RockPaperScissorsSpockLizard
  [x] Can set and get rounds
+ [x] Throws exception for bad set round values
+ [x] Throws exception for invalid plays
+ [x] Exception object output strings
+ [x] Can get last play
  [x] Can restart the game
+ [x] Can make a play
+ [x] Can make a play via magic
+ [x] Magic play fails for bad plays
 

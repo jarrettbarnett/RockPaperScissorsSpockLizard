@@ -4,7 +4,8 @@ use Jarrett\RockPaperScissorsSpockLizardException;
 
 /**
  * Class RockPaperScissorsSpockLizard
- * @package Jarrett
+ *
+ * @author Jarrett Barnett <hello@jarrettbarnett.com
  * @see http://www.samkass.com/theories/RPSSL.html
  */
 class RockPaperScissorsSpockLizard {
@@ -50,7 +51,17 @@ class RockPaperScissorsSpockLizard {
         ]
     ];
 
-    private $rounds;
+    /**
+     * The number of rounds to play
+     * @var $rounds
+     */
+    private $rounds = false;
+
+    /**
+     * The last played move
+     * @var $last_play
+     */
+    private $last_play = false;
 
     /**
      * Set Rounds
@@ -62,7 +73,7 @@ class RockPaperScissorsSpockLizard {
     {
         if (!is_numeric($rounds))
         {
-            throw new RockPaperScissorsSpockLizardException('Invalid number of rounds supplied for setRounds()');
+            throw new RockPaperScissorsSpockLizardException('Invalid value supplied for setRounds()');
         }
 
         $this->rounds = (int) $rounds;
@@ -82,9 +93,57 @@ class RockPaperScissorsSpockLizard {
     /**
      * Restart Game
      */
-    public function restart() {
+    public function restart()
+    {
         $this->setRounds(0);
 
         return $this;
+    }
+    
+    /**
+     * Play Move
+     * @param $move
+     * @throws \Jarrett\RockPaperScissorsSpockLizardException
+     */
+    public function play($move)
+    {
+        if (empty($move))
+        {
+            throw new RockPaperScissorsSpockLizardException('Move parameter cannot be empty for play()');
+        }
+
+        $this->last_play = $move;
+    }
+    
+    /**
+     * __call
+     * @param $name
+     * @param $arguments
+     * @method RockPaperScissorsSpockLizard playRock()
+     * @method RockPaperScissorsSpockLizard playPaper()
+     * @method RockPaperScissorsSpockLizard playScissors()
+     * @method RockPaperScissorsSpockLizard playSpock()
+     * @method RockPaperScissorsSpockLizard playLizard()
+     * @return null - if not an approved play method
+     */
+    function __call($name, $arguments)
+    {
+        if (strpos($name, 'play') !== 0) {
+            return null;
+        }
+        
+        $move = substr($name, 4);
+        if (in_array($move, array_keys($this->outcomes))) {
+            $this->play(strtolower($move));
+        }
+    }
+    
+    /**
+     * Get Last Play
+     * @return mixed
+     */
+    public function getLastPlay()
+    {
+        return $this->last_play;
     }
 }

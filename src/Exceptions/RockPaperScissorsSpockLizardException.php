@@ -21,4 +21,3 @@ class RockPaperScissorsSpockLizardException extends Exception
         return __CLASS__ . ": [{$this->code}]: {$this->message}\n";
     }
 }
-
