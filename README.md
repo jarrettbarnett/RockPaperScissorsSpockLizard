@@ -45,8 +45,15 @@ or if the game is over:
     $round3 = $game->playLizard;
     
     echo $game->won() ? 'Congrats, you won!' : 'So sad, you lost!';
-        
+    
 ### Reference:
+
+#### setRounds( _string_ $number, _bool_ $lock = false)
+Set the number of rounds for this game.
+#### Parameters
+###### $number _integer_
+* The maximum number of rounds before a winner is chosen
+
 #### getLastPlay()
 Returns the last play that was performed. 
 #### restart()
