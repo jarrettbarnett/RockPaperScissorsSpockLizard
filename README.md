@@ -56,5 +56,6 @@ Set the number of rounds for this game.
 
 #### getLastPlay()
 Returns the last play that was performed. 
+
 #### restart()
 Restarts the game
