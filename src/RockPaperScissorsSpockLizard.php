@@ -27,7 +27,11 @@ class RockPaperScissorsSpockLizard {
         self::SPOCK     => 'spock',
         self::LIZARD    => 'lizard',
     ];
-
+    
+    /**
+     * Outcomes
+     * @var array
+     */
     private $outcomes = [
         self::ROCK => [
             self::SCISSORS,
@@ -68,6 +72,25 @@ class RockPaperScissorsSpockLizard {
      * @var $last_play
      */
     private $last_play = false;
+    
+    /**
+     * @var $last_outcome
+     */
+    private $last_outcome = false;
+    
+    /**
+     * End of index for move outcomes
+     * @var bool|int
+     */
+    private $moves_index_end = false;
+    
+    /**
+     * RockPaperScissorsSpockLizard constructor.
+     */
+    public function __construct()
+    {
+        $this->moves_index_end = count(array_keys($this->outcomes)) - 1;
+    }
     
     /**
      * Set Rounds
@@ -119,7 +142,10 @@ class RockPaperScissorsSpockLizard {
     
     /**
      * Play Move
+     *
      * @param $move
+     *
+     * @return bool
      * @throws \Jarrett\RockPaperScissorsSpockLizardException
      */
     public function play($move)
@@ -127,8 +153,63 @@ class RockPaperScissorsSpockLizard {
         if (empty($move)) {
             throw new RockPaperScissorsSpockLizardException('Move parameter cannot be empty for play()');
         }
-
+        
+        $play_index = $this->getPlayIndex($move);
+        if ($play_index == false)
+        {
+            throw new RockPaperScissorsSpockLizardException('Invalid move!');
+        }
+    
+        if (!isset($outcomes[$play_index])) {
+            return false;
+        }
+        
         $this->last_play = $move;
+        
+        $this->last_outcome = $this->determineOutcome($play_index);
+        
+        return $this->last_outcome;
+    }
+    
+    protected function getPlayIndex($move)
+    {
+        return array_flip($this->labels[$move]);
+    }
+    
+    /**
+     * Get Random Move Using Mersenne Twister for even distribution
+     * @return int
+     */
+    private function generateMove()
+    {
+        return $this->outcomes[mt_rand(0, $this->moves_index_end)];
+    }
+    
+    /**
+     * Determine Outcome
+     * @param $player_move
+     * @param $opponent_move
+     * @return string
+     */
+    public function determineOutcome($player_move, $opponent_move)
+    {
+        // if no opponent parameter, generate move as computer opponent
+        if (empty($second_move))
+        {
+            $opponent_move = $this->generateMove();
+        }
+        
+        // compare player with opponent
+        if (isset($this->outcomes[$player_move][$opponent_move])) {
+            return $this->last_outcome = 'player';
+        }
+        
+        // check opponent against player
+        if (isset($this->outcomes[$opponent_move][$player_move])) {
+            return $this->last_outcome = 'opponent';
+        }
+        
+        return $this->last_outcome = 'tie';
     }
     
     /**
@@ -148,9 +229,9 @@ class RockPaperScissorsSpockLizard {
             return null;
         }
         
-        $move = substr($name, 4);
+        $move = strtolower(substr($name, 4));
         if (in_array($move, array_keys($this->outcomes))) {
-            $this->play(strtolower($move));
+            $this->play($move);
         }
     }
     

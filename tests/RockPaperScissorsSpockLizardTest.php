@@ -98,8 +98,10 @@ class RockPaperScissorsSpockLizardTest extends TestCase
         $this->assertEquals('spock', $last_play, 'Game returned invalid play for last play');
     }
     
+    public
+    
     /** @test */
-    public function magic_play_fails_for_bad_plays()
+    public function cannot_make_a_play_via_bad_magic_method()
     {
         $this->game->restart();
         $name = $this->game->randomMethodName('random');
@@ -122,4 +124,5 @@ class RockPaperScissorsSpockLizardTest extends TestCase
         $this->expectException(RockPaperScissorsSpockLizardException::class);
         $this->game->setRounds(5, 'some value');
     }
+    
 }
