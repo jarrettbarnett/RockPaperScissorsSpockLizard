@@ -36,7 +36,7 @@ class Player implements PlayerInterface
      * @return $this
      * @throws RockPaperScissorsSpockLizardException
      */
-    public function play($move)
+    public function move($move)
     {
         $last_move = $this->getLastMove();
         

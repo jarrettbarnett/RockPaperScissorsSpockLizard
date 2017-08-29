@@ -12,5 +12,5 @@ interface PlayerInterface {
      * Make a play
      * @param $move
      */
-    public function play($move);
+    public function move($move);
 }
