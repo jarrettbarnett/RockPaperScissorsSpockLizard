@@ -39,7 +39,7 @@ class Player implements PlayerInterface
      */
     public function __construct($name = '')
     {
-        $this->name = $this->setName($name);
+        $this->setName($name);
     }
     
     /**
