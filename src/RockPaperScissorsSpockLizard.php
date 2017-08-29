@@ -186,7 +186,7 @@ class RockPaperScissorsSpockLizard {
      * @param $opponent_move
      * @return string
      */
-    public function determineOutcome($player_move, $opponent_move)
+    private function determineOutcome($player_move, $opponent_move)
     {
         // if no opponent parameter, generate move as computer opponent
         if (empty($second_move))
