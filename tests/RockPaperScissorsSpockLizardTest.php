@@ -62,7 +62,7 @@ class RockPaperScissorsSpockLizardTest extends TestCase
         // TODO make some plays, and test that those are erased too
 
         $this->game->restart();
-        $this->assertEquals(0, $this->game->getRounds(), 'Game returned invalid number of rounds');
+        $this->assertEquals(1, $this->game->getRounds(), 'Game returned invalid number of rounds');
     }
     
     /** @test */
