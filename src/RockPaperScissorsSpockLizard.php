@@ -54,7 +54,7 @@ class RockPaperScissorsSpockLizard {
             self::PAPER
         ]
     ];
-
+    
     /**
      * The number of rounds to play
      * @var $rounds
@@ -77,6 +77,11 @@ class RockPaperScissorsSpockLizard {
      * @var bool|int
      */
     private $moves_index_end = false;
+    
+    /**
+     * @var $players - collection of players
+     */
+    protected $players = false;
     
     /**
      * RockPaperScissorsSpockLizard constructor.
@@ -211,4 +216,12 @@ class RockPaperScissorsSpockLizard {
     public function addPlayers() {}
     public function getRoundWinner() {}
     public function getWinner() {}
+    
+    /**
+     * @return bool
+     */
+    public function getPlayers()
+    {
+        return $this->players;
+    }
 }

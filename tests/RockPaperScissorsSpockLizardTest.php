@@ -81,4 +81,13 @@ class RockPaperScissorsSpockLizardTest extends TestCase
         $this->game->setRounds(5, 'some value');
     }
     
+    /** @test */
+    public function receive_false_if_getting_players_before_setting_players()
+    {
+        $this->game->restart();
+        $players = $this->game->getPlayers();
+        
+        $this->assertFalse($players, 'Getting players when none have been set should return false');
+    }
+    
 }
