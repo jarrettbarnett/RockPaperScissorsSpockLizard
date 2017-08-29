@@ -207,4 +207,8 @@ class RockPaperScissorsSpockLizard {
         return $this->last_outcome = 'tie';
     }
     
+    public function addPlayer() {}
+    public function addPlayers() {}
+    public function getRoundWinner() {}
+    public function getWinner() {}
 }
