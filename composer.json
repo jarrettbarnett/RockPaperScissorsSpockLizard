@@ -13,5 +13,10 @@
             "email": "hello@jarrettbarnett.com"
         }
     ],
-    "require": {}
+    "require": {},
+    "autoload": {
+      "psr-4": {
+        "Jarrett\\RockPaperScissorsSpockLizard\\": "src/"
+      }
+    }
 }
