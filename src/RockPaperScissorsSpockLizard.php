@@ -1,7 +1,5 @@
 <?php namespace Jarrett;
 
-use Jarrett\RockPaperScissorsSpockLizardException;
-
 /**
  * Class RockPaperScissorsSpockLizard
  *
