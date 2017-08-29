@@ -1,5 +1,7 @@
 <?php namespace Jarrett;
 
+use Jarrett\RockPaperScissorsSpockLizard\Player;
+
 /**
  * Class RockPaperScissorsSpockLizard
  *
@@ -15,6 +17,7 @@ class RockPaperScissorsSpockLizard {
     const LIZARD = 4;
     
     const DEFAULT_NUM_ROUNDS = 1;
+    const DEFAULT_PLAYER_NAME_PREFIX = 'Player ';
 
     /**
      * Move labels
@@ -136,6 +139,7 @@ class RockPaperScissorsSpockLizard {
     public function restart()
     {
         $this->setRounds(self::DEFAULT_NUM_ROUNDS);
+        $this->players = false;
 
         return $this;
     }
@@ -187,33 +191,75 @@ class RockPaperScissorsSpockLizard {
     
     /**
      * Determine Outcome
-     * @param $player_move
-     * @param $opponent_move
      * @return string
      */
-    private function determineOutcome($player_move, $opponent_move)
+    private function determineOutcome()
     {
-        // if no opponent parameter, generate move as computer opponent
-        if (empty($second_move))
-        {
-            $opponent_move = $this->generateMove();
-        }
-        
-        // compare player with opponent
-        if (isset($this->outcomes[$player_move][$opponent_move])) {
-            return $this->last_outcome = 'player';
-        }
-        
-        // check opponent against player
-        if (isset($this->outcomes[$opponent_move][$player_move])) {
-            return $this->last_outcome = 'opponent';
-        }
-        
-        return $this->last_outcome = 'tie';
+//        // if no opponent parameter, generate move as computer opponent
+//        if (empty($second_move))
+//        {
+//            $opponent_move = $this->generateMove();
+//        }
+//
+//        // compare player with opponent
+//        if (isset($this->outcomes[$player_move][$opponent_move])) {
+//            return $this->last_outcome = 'player';
+//        }
+//
+//        // check opponent against player
+//        if (isset($this->outcomes[$opponent_move][$player_move])) {
+//            return $this->last_outcome = 'opponent';
+//        }
+//
+//        return $this->last_outcome = 'tie';
     }
     
-    public function addPlayer() {}
-    public function addPlayers() {}
+    /**
+     * Add Player
+     * @param Player $player
+     * @return $this
+     */
+    public function addPlayer(Player $player)
+    {
+        $count = $this->getTotalPlayers();
+        
+        // give player a name if they dont have one
+        if (empty($player->getName())) {
+            $player->setName(self::DEFAULT_PLAYER_NAME_PREFIX . ($count + 1)); // we add 1 since $count is an array pointer
+        }
+        
+        $this->players[$count] = $player;
+        
+        return $this;
+    }
+    
+    /**
+     * Add Players
+     *
+     * @return $this
+     * @throws RockPaperScissorsSpockLizardException
+     */
+    public function addPlayers()
+    {
+        if (func_num_args() < 1) {
+            throw new RockPaperScissorsSpockLizardException('No player objects supplied to addPlayers()');
+        }
+        
+        $count = 0;
+        foreach (func_get_args() as $player) {
+            
+            $count++;
+            // error if not Player objects
+            if (!$player instanceof Player) {
+                throw new RockPaperScissorsSpockLizardException('Parameter # ' . $count . ' is not an instance of Player()');
+            }
+            
+            $this->addPlayer($player);
+        }
+        
+        return $this;
+    }
+    
     public function getRoundWinner() {}
     public function getWinner() {}
     
@@ -223,5 +269,16 @@ class RockPaperScissorsSpockLizard {
     public function getPlayers()
     {
         return $this->players;
+    }
+    
+    /**
+     * Get Total Player Count
+     * @return int
+     */
+    public function getTotalPlayers()
+    {
+        $player_count = $this->getPlayers();
+        
+        return $player_count === false ? 0 : count($player_count);
     }
 }

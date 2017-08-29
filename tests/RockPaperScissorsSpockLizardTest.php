@@ -3,6 +3,7 @@
 use Jarrett\RockPaperScissorsSpockLizardException;
 use PHPUnit\Framework\TestCase;
 use Jarrett\RockPaperScissorsSpockLizard;
+use Jarrett\RockPaperScissorsSpockLizard\Player;
 
 class RockPaperScissorsSpockLizardTest extends TestCase
 {
@@ -88,6 +89,88 @@ class RockPaperScissorsSpockLizardTest extends TestCase
         $players = $this->game->getPlayers();
         
         $this->assertFalse($players, 'Getting players when none have been set should return false');
+    }
+    
+    /** @test */
+    public function can_add_players()
+    {
+        $player = new Player();
+        $player->move('rock');
+        
+        $game = new RockPaperScissorsSpockLizard();
+        $game->addPlayer($player);
+        
+        $players = $game->getPlayers();
+        
+        $this->assertNotEmpty($players);
+    }
+    
+    /** @test */
+    public function can_add_lots_of_players()
+    {
+        $game = new RockPaperScissorsSpockLizard();
+        $players_to_add = 5;
+        
+        for ($i = $players_to_add; $i > 0; $i--)
+        {
+            $game->addPlayer((new Player));
+        }
+        
+        $players = $game->getPlayers();
+        
+        $this->assertCount($players_to_add, $players, 'Not the right amount of players');
+    }
+    
+    /** @test */
+    public function can_add_lots_of_players_at_once()
+    {
+        $player1 = new Player();
+        $player2 = new Player();
+        $player3 = new Player();
+        $player4 = new Player();
+        
+        $game = new RockPaperScissorsSpockLizard();
+        $game->addPlayers($player1, $player2, $player3, $player4);
+        
+        $players = $game->getPlayers();
+    
+        $this->assertCount(4, $players, 'Not the right amount of players');
+    }
+    
+    /** @test */
+    public function restart_game_removes_players()
+    {
+        $game = new RockPaperScissorsSpockLizard();
+        $game->addPlayer(new Player);
+        
+        $this->assertNotEmpty($game->getPlayers(), 'Player did not set properly!');
+        
+        $game->restart();
+        $this->assertEmpty($game->getPlayers(), 'Players was not reset');
+    }
+    
+    /** @test */
+    public function exception_thrown_if_no_parameters_for_setting_players()
+    {
+        $this->expectException(RockPaperScissorsSpockLizardException::class);
+        
+        $this->game->restart();
+        
+        $this->game->addPlayers();
+    }
+    
+    /** @test */
+    public function exception_thrown_if_one_or_more_parameters_not_player_instance()
+    {
+        $this->expectException(RockPaperScissorsSpockLizardException::class);
+        
+        $this->game->restart();
+        
+        $player1 = new Player();
+        $player2 = new Player();
+        $player3 = 'a string and not a player object';
+        
+        $this->game->addPlayers($player1, $player2, $player3);
     }
     
 }
