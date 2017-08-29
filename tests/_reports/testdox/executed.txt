@@ -12,4 +12,11 @@ RockPaperScissorsSpockLizardTest\RockPaperScissorsSpockLizard
  [x] Can restart the game
  [x] Exception thrown for set rounds when locked
  [x] Exception thrown for invalid type for set round lock
+ [x] Receive false if getting players before setting players
+ [x] Can add players
+ [x] Can add lots of players
+ [x] Can add lots of players at once
+ [x] Restart game removes players
+ [x] Exception thrown if no parameters for setting players
+ [x] Exception thrown if one or more parameters not player instance
 
