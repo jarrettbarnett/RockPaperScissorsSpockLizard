@@ -212,35 +212,4 @@ class RockPaperScissorsSpockLizard {
         return $this->last_outcome = 'tie';
     }
     
-    /**
-     * __call
-     * @param $name
-     * @param $arguments
-     * @method RockPaperScissorsSpockLizard playRock()
-     * @method RockPaperScissorsSpockLizard playPaper()
-     * @method RockPaperScissorsSpockLizard playScissors()
-     * @method RockPaperScissorsSpockLizard playSpock()
-     * @method RockPaperScissorsSpockLizard playLizard()
-     * @return null - if not an approved play method
-     */
-    function __call($name, $arguments)
-    {
-        if (strpos($name, 'play') !== 0) {
-            return null;
-        }
-        
-        $move = strtolower(substr($name, 4));
-        if (in_array($move, array_keys($this->outcomes))) {
-            $this->play($move);
-        }
-    }
-    
-    /**
-     * Get Last Play
-     * @return mixed
-     */
-    public function getLastPlay()
-    {
-        return $this->last_play;
-    }
 }
