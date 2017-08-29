@@ -20,7 +20,7 @@ class PlayerTest extends TestCase
     public function can_queue_a_play()
     {
         $player = new Player();
-        $player->play('spock');
+        $player->move('spock');
         
         $last_move = $player->getLastMove();
         
@@ -31,7 +31,7 @@ class PlayerTest extends TestCase
     public function can_get_move_history()
     {
         $player = new Player();
-        $player->play('rock');
+        $player->move('rock');
         
         $history = $player->getMoveHistory();
         
@@ -44,7 +44,7 @@ class PlayerTest extends TestCase
         $this->expectException(RockPaperScissorsSpockLizardException::class);
         
         $player = new Player();
-        $player->play('paper');
-        $player->play('scissors');
+        $player->move('paper');
+        $player->move('scissors');
     }
 }
