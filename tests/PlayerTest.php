@@ -1,9 +1,9 @@
 <?php namespace RockPaperScissorsSpockLizardTest;
 
-use Jarrett\RockPaperScissorsSpockLizard;
 use PHPUnit\Framework\TestCase;
-use Jarrett\RockPaperScissorsSpockLizardException;
+use Jarrett\RockPaperScissorsSpockLizard\Game;
 use Jarrett\RockPaperScissorsSpockLizard\Player;
+use Jarrett\RockPaperScissorsSpockLizardException;
 
 class PlayerTest extends TestCase
 {
@@ -75,7 +75,7 @@ class PlayerTest extends TestCase
         $player2 = new Player();
         $player2->move('rock');
 
-        $game = new RockPaperScissorsSpockLizard();
+        $game = new Game();
 
         $game->addPlayers($player1, $player2)
               ->play();

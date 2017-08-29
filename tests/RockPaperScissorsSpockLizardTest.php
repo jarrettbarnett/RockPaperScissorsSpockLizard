@@ -2,7 +2,7 @@
 
 use Jarrett\RockPaperScissorsSpockLizardException;
 use PHPUnit\Framework\TestCase;
-use Jarrett\RockPaperScissorsSpockLizard;
+use Jarrett\RockPaperScissorsSpockLizard\Game;
 use Jarrett\RockPaperScissorsSpockLizard\Player;
 
 class RockPaperScissorsSpockLizardTest extends TestCase
@@ -11,7 +11,7 @@ class RockPaperScissorsSpockLizardTest extends TestCase
 
     public function setUp()
     {
-        $this->game = new RockPaperScissorsSpockLizard();
+        $this->game = new Game();
     }
 
     /** @test */
@@ -97,7 +97,7 @@ class RockPaperScissorsSpockLizardTest extends TestCase
         $player = new Player();
         $player->move('rock');
         
-        $game = new RockPaperScissorsSpockLizard();
+        $game = new Game();
         $game->addPlayer($player);
         
         $players = $game->getPlayers();
@@ -108,7 +108,7 @@ class RockPaperScissorsSpockLizardTest extends TestCase
     /** @test */
     public function can_add_lots_of_players()
     {
-        $game = new RockPaperScissorsSpockLizard();
+        $game = new Game();
         $players_to_add = 5;
         
         for ($i = $players_to_add; $i > 0; $i--)
@@ -129,7 +129,7 @@ class RockPaperScissorsSpockLizardTest extends TestCase
         $player3 = new Player();
         $player4 = new Player();
         
-        $game = new RockPaperScissorsSpockLizard();
+        $game = new Game();
         $game->addPlayers($player1, $player2, $player3, $player4);
         
         $players = $game->getPlayers();
@@ -140,7 +140,7 @@ class RockPaperScissorsSpockLizardTest extends TestCase
     /** @test */
     public function restart_game_removes_players()
     {
-        $game = new RockPaperScissorsSpockLizard();
+        $game = new Game();
         $game->addPlayer(new Player);
         
         $this->assertNotEmpty($game->getPlayers(), 'Player did not set properly!');
@@ -178,7 +178,7 @@ class RockPaperScissorsSpockLizardTest extends TestCase
     {
         $this->expectException(RockPaperScissorsSpockLizardException::class);
 
-        $game = new RockPaperScissorsSpockLizard();
+        $game = new Game();
         $player1 = new Player();
         $player2 = new Player();
         $player2->move('rock');
@@ -190,7 +190,7 @@ class RockPaperScissorsSpockLizardTest extends TestCase
     /** @test */
     public function players_exist_when_added()
     {
-        $game = new RockPaperScissorsSpockLizard();
+        $game = new Game();
 
         $human = new Player();
         $human->move('spock');
@@ -209,7 +209,7 @@ class RockPaperScissorsSpockLizardTest extends TestCase
     /** @test */
     public function can_play_game_against_bot()
     {
-        $game = new RockPaperScissorsSpockLizard();
+        $game = new Game();
         
         $human = new Player();
         $human->move('spock');
@@ -227,7 +227,7 @@ class RockPaperScissorsSpockLizardTest extends TestCase
     /** @test */
     public function can_set_move_for_bot()
     {
-        $game = new RockPaperScissorsSpockLizard();
+        $game = new Game();
 
         $human = new Player();
         $human->move('spock');
@@ -246,7 +246,7 @@ class RockPaperScissorsSpockLizardTest extends TestCase
     /** @test */
     public function players_can_tie()
     {
-        $game = new RockPaperScissorsSpockLizard();
+        $game = new Game();
 
         $player1 = new Player();
         $player1->move('rock');
@@ -264,7 +264,7 @@ class RockPaperScissorsSpockLizardTest extends TestCase
     /** @test */
     public function players_can_win()
     {
-        $game = new RockPaperScissorsSpockLizard();
+        $game = new Game();
 
         $player1 = new Player();
         $player1->move('rock');
@@ -287,7 +287,7 @@ class RockPaperScissorsSpockLizardTest extends TestCase
     {
         $this->expectException(RockPaperScissorsSpockLizardException::class);
 
-        $game = new RockPaperScissorsSpockLizard();
+        $game = new Game();
 
         $player1 = new Player();
         $player1->move('rock');
@@ -307,7 +307,7 @@ class RockPaperScissorsSpockLizardTest extends TestCase
     {
         $this->expectException(RockPaperScissorsSpockLizardException::class);
 
-        $game = new RockPaperScissorsSpockLizard();
+        $game = new Game();
 
         $player1 = new Player();
         $player1->move('rock');

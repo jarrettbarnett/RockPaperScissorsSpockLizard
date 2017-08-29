@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1504025344">
-  <project timestamp="1504025344">
+<coverage generated="1504031643">
+  <project timestamp="1504031643">
     <package name="Jarrett">
       <file name="/Users/jarrett/Sites/jarrett/rpssl/root/src/Exceptions/RockPaperScissorsSpockLizardException.php">
         <class name="RockPaperScissorsSpockLizardException" namespace="Jarrett" fullPackage="HughesApi" package="HughesApi">
@@ -13,8 +13,10 @@
         <line num="21" type="stmt" count="1"/>
         <metrics loc="23" ncloc="13" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="5" coveredelements="5"/>
       </file>
-      <file name="/Users/jarrett/Sites/jarrett/rpssl/root/src/RockPaperScissorsSpockLizard.php">
-        <class name="RockPaperScissorsSpockLizard" namespace="Jarrett">
+    </package>
+    <package name="Jarrett\RockPaperScissorsSpockLizard">
+      <file name="/Users/jarrett/Sites/jarrett/rpssl/root/src/Game.php">
+        <class name="Game" namespace="Jarrett\RockPaperScissorsSpockLizard">
           <metrics complexity="46" methods="18" coveredmethods="18" conditionals="0" coveredconditionals="0" statements="100" coveredstatements="100" elements="118" coveredelements="118"/>
         </class>
         <line num="98" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="22"/>
@@ -137,8 +139,6 @@
         <line num="423" type="stmt" count="14"/>
         <metrics loc="425" ncloc="277" classes="1" methods="18" coveredmethods="18" conditionals="0" coveredconditionals="0" statements="100" coveredstatements="100" elements="118" coveredelements="118"/>
       </file>
-    </package>
-    <package name="Jarrett\RockPaperScissorsSpockLizard">
       <file name="/Users/jarrett/Sites/jarrett/rpssl/root/src/Player.php">
         <class name="Player" namespace="Jarrett\RockPaperScissorsSpockLizard">
           <metrics complexity="15" methods="10" coveredmethods="10" conditionals="0" coveredconditionals="0" statements="31" coveredstatements="31" elements="41" coveredelements="41"/>

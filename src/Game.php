@@ -1,6 +1,6 @@
-<?php namespace Jarrett;
+<?php namespace Jarrett\RockPaperScissorsSpockLizard;
 
-use Jarrett\RockPaperScissorsSpockLizard\Player;
+use Jarrett\RockPaperScissorsSpockLizardException;
 
 /**
  * Class RockPaperScissorsSpockLizard
@@ -8,7 +8,7 @@ use Jarrett\RockPaperScissorsSpockLizard\Player;
  * @author Jarrett Barnett <hello@jarrettbarnett.com
  * @see http://www.samkass.com/theories/RPSSL.html
  */
-class RockPaperScissorsSpockLizard {
+class Game {
 
     const ROCK = 0;
     const PAPER = 1;
