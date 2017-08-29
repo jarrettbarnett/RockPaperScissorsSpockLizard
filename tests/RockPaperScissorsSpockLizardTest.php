@@ -50,7 +50,7 @@ class RockPaperScissorsSpockLizardTest extends TestCase
         echo $exception;
         $exception_string = ob_get_clean();
     
-        $this->assertNotEmpty($exception, 'Exception message should not be empty');
+        $this->assertNotEmpty($exception_string, 'Exception message should not be empty');
     }
 
     /** @test */
