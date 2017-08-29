@@ -99,6 +99,9 @@ Add player to the game.
 #### addPlayers()
 Add multiple players to the game.
 
+#### getPlayers()
+Return players for game.
+
 #### getRoundWinner()
 Returns the player who won the last round.
 
