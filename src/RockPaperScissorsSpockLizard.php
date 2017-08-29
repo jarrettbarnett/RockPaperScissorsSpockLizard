@@ -81,6 +81,7 @@ class RockPaperScissorsSpockLizard {
      */
     public function __construct()
     {
+        $this->setRounds(1);
         $this->moves_index_end = count(array_keys($this->outcomes)) - 1;
     }
     
@@ -127,7 +128,7 @@ class RockPaperScissorsSpockLizard {
      */
     public function restart()
     {
-        $this->setRounds(0);
+        $this->setRounds(1);
 
         return $this;
     }
