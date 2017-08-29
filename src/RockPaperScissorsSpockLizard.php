@@ -64,12 +64,6 @@ class RockPaperScissorsSpockLizard {
      * @var $rounds_lock
      */
     private $rounds_lock;
-
-    /**
-     * The last played move
-     * @var $last_play
-     */
-    private $last_play = false;
     
     /**
      * @var $last_outcome
