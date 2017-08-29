@@ -13,6 +13,8 @@ class RockPaperScissorsSpockLizard {
     const SCISSORS = 2;
     const SPOCK = 3;
     const LIZARD = 4;
+    
+    const DEFAULT_NUM_ROUNDS = 1;
 
     /**
      * Move labels
@@ -81,7 +83,7 @@ class RockPaperScissorsSpockLizard {
      */
     public function __construct()
     {
-        $this->setRounds(1);
+        $this->setRounds(self::DEFAULT_NUM_ROUNDS);
         $this->moves_index_end = count(array_keys($this->outcomes)) - 1;
     }
     
@@ -128,7 +130,7 @@ class RockPaperScissorsSpockLizard {
      */
     public function restart()
     {
-        $this->setRounds(1);
+        $this->setRounds(self::DEFAULT_NUM_ROUNDS);
 
         return $this;
     }
