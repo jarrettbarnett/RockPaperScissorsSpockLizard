@@ -3,6 +3,8 @@ RockPaperScissorsSpockLizardTest\Player
  [x] Can queue a play
  [x] Can get move history
  [x] Cannot set more than one move at a time
+ [x] Mark last move as played
+ [x] Exception thrown if move empty
 
 RockPaperScissorsSpockLizardTest\RockPaperScissorsSpockLizard
  [x] Can set and get rounds
@@ -19,4 +21,12 @@ RockPaperScissorsSpockLizardTest\RockPaperScissorsSpockLizard
  [x] Restart game removes players
  [x] Exception thrown if no parameters for setting players
  [x] Exception thrown if one or more parameters not player instance
+ [x] Exception thrown if player has not set a move
+ [x] Players exist when added
+ [x] Can play game against bot
+ [x] Can set move for bot
+ [x] Players can tie
+ [x] Players can win
+ [x] Exception thrown if game already played
+ [x] Exception thrown if only one player
 

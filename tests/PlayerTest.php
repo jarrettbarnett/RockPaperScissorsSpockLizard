@@ -1,5 +1,6 @@
 <?php namespace RockPaperScissorsSpockLizardTest;
 
+use Jarrett\RockPaperScissorsSpockLizard;
 use PHPUnit\Framework\TestCase;
 use Jarrett\RockPaperScissorsSpockLizardException;
 use Jarrett\RockPaperScissorsSpockLizard\Player;
@@ -46,5 +47,37 @@ class PlayerTest extends TestCase
         $player = new Player();
         $player->move('paper');
         $player->move('scissors');
+    }
+
+    /** @test */
+    public function mark_last_move_as_played()
+    {
+        $player = new Player();
+        $player->move('rock');
+
+        $last_move = $player->getLastMove();
+        $this->assertEquals(false, current($last_move), 'Last move not set correctly');
+
+        $player->lastMoveIsPlayed();
+        $last_move = $player->getLastMove();
+        $this->assertEquals(true, current($last_move), 'Last move was not marked as played');
+    }
+
+    /** @test */
+    public function exception_thrown_if_move_empty()
+    {
+        $this->expectException(RockPaperScissorsSpockLizardException::class);
+
+        // set empty move
+        $player1 = new Player();
+        $player1->move('');
+
+        $player2 = new Player();
+        $player2->move('rock');
+
+        $game = new RockPaperScissorsSpockLizard();
+
+        $game->addPlayers($player1, $player2)
+              ->play();
     }
 }

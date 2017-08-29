@@ -172,5 +172,147 @@ class RockPaperScissorsSpockLizardTest extends TestCase
         
         $this->game->addPlayers($player1, $player2, $player3);
     }
+
+    /** @test */
+    public function exception_thrown_if_player_has_not_set_a_move()
+    {
+        $this->expectException(RockPaperScissorsSpockLizardException::class);
+
+        $game = new RockPaperScissorsSpockLizard();
+        $player1 = new Player();
+        $player2 = new Player();
+        $player2->move('rock');
+
+        $game->addPlayers($player1, $player2);
+        $game->play();
+    }
+
+    /** @test */
+    public function players_exist_when_added()
+    {
+        $game = new RockPaperScissorsSpockLizard();
+
+        $human = new Player();
+        $human->move('spock');
+
+        $bot = new Player();
+        $bot->isBot(true);
+        $bot->move('rock');
+
+        $game->addPlayers($human, $bot);
+
+
+        $total = $game->getTotalPlayers();
+        $this->assertNotEmpty($total);
+    }
     
+    /** @test */
+    public function can_play_game_against_bot()
+    {
+        $game = new RockPaperScissorsSpockLizard();
+        
+        $human = new Player();
+        $human->move('spock');
+
+        $bot = new Player();
+        $bot->isBot(true);
+
+        $game->addPlayers($human, $bot);
+        $game->play();
+
+        $outcome = $game->getRoundOutcome();
+        $this->assertNotEmpty($outcome, 'Outcome is empty');
+    }
+
+    /** @test */
+    public function can_set_move_for_bot()
+    {
+        $game = new RockPaperScissorsSpockLizard();
+
+        $human = new Player();
+        $human->move('spock');
+
+        $bot = new Player();
+        $bot->isBot(true);
+        $bot->move('rock');
+
+        $game->addPlayers($human, $bot);
+        $game->play();
+
+        $outcome = $game->getRoundOutcome();
+        $this->assertNotEmpty($outcome, 'Outcome is empty');
+    }
+
+    /** @test */
+    public function players_can_tie()
+    {
+        $game = new RockPaperScissorsSpockLizard();
+
+        $player1 = new Player();
+        $player1->move('rock');
+
+        $player2 = new Player();
+        $player2->move('rock');
+
+        $game->addPlayers($player1, $player2);
+        $game->play();
+
+        $outcome = $game->getOutcomes();
+        $this->assertNotEmpty($outcome[0]['ties'], 'Ties outcome is empty');
+    }
+
+    /** @test */
+    public function players_can_win()
+    {
+        $game = new RockPaperScissorsSpockLizard();
+
+        $player1 = new Player();
+        $player1->move('rock');
+
+        $player2 = new Player();
+        $player2->move('scissors');
+
+        $game->addPlayers($player1, $player2);
+        $game->play();
+
+        $outcome = $game->getWinners();
+        $this->assertNotEmpty($outcome, 'No winners!');
+
+        $round_outcome = $game->getRoundWinners();
+        $this->assertNotEmpty($round_outcome, 'No round winners!');
+    }
+
+    /** @test */
+    public function exception_thrown_if_game_already_played()
+    {
+        $this->expectException(RockPaperScissorsSpockLizardException::class);
+
+        $game = new RockPaperScissorsSpockLizard();
+
+        $player1 = new Player();
+        $player1->move('rock');
+
+        $player2 = new Player();
+        $player2->move('scissors');
+
+        $game->addPlayers($player1, $player2);
+        $game->play();
+
+        // play it again
+        $game->play();
+    }
+
+    /** @test */
+    public function exception_thrown_if_only_one_player()
+    {
+        $this->expectException(RockPaperScissorsSpockLizardException::class);
+
+        $game = new RockPaperScissorsSpockLizard();
+
+        $player1 = new Player();
+        $player1->move('rock');
+
+        $game->addPlayer($player1);
+        $game->play();
+    }
 }

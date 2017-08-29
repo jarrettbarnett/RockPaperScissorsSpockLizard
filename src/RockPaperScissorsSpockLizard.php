@@ -30,33 +30,39 @@ class RockPaperScissorsSpockLizard {
         self::SPOCK     => 'spock',
         self::LIZARD    => 'lizard',
     ];
-    
+
     /**
      * Outcomes
      * @var array
      */
-    private $outcomes = [
+    private $move_outcomes = [
         self::ROCK => [
-            self::SCISSORS,
-            self::LIZARD
+            self::SCISSORS => 'crushes',
+            self::LIZARD => 'crushes'
         ],
         self::PAPER => [
-            self::ROCK,
-            self::SPOCK
+            self::ROCK => 'covers',
+            self::SPOCK => 'disproves'
         ],
         self::SCISSORS => [
-            self::PAPER,
-            self::LIZARD
+            self::PAPER => 'cuts',
+            self::LIZARD => 'decapitates'
         ],
         self::SPOCK => [
-            self::SCISSORS,
-            self::ROCK
+            self::SCISSORS => 'smashes',
+            self::ROCK => 'vaporizes'
         ],
         self::LIZARD => [
-            self::SPOCK,
-            self::PAPER
+            self::SPOCK => 'poisons',
+            self::PAPER => 'eats'
         ]
     ];
+    
+    /**
+     * Game Outcome
+     * @var $outcomes
+     */
+    protected $outcomes;
     
     /**
      * The number of rounds to play
@@ -92,7 +98,9 @@ class RockPaperScissorsSpockLizard {
     public function __construct()
     {
         $this->setRounds(self::DEFAULT_NUM_ROUNDS);
-        $this->moves_index_end = count(array_keys($this->outcomes)) - 1;
+        $this->moves_index_end = count(array_keys($this->move_outcomes)) - 1;
+        
+        return $this;
     }
     
     /**
@@ -146,38 +154,38 @@ class RockPaperScissorsSpockLizard {
     
     /**
      * Play Move
-     *
-     * @param $move
-     *
      * @return bool
      * @throws \Jarrett\RockPaperScissorsSpockLizardException
      */
-    public function play($move)
+    public function play()
     {
-        if (empty($move)) {
-            throw new RockPaperScissorsSpockLizardException('Move parameter cannot be empty for play()');
+        if ($this->getOutcomes() > 0 && $this->getRounds() >= count($this->getOutcomes())) {
+            throw new RockPaperScissorsSpockLizardException('The game has already been played. Use getOutcomes() to see the game results!');
         }
         
-        $play_index = $this->getPlayIndex($move);
-        if ($play_index == false)
-        {
-            throw new RockPaperScissorsSpockLizardException('Invalid move!');
-        }
-    
-        if (!isset($outcomes[$play_index])) {
-            return false;
+        if (empty($this->getTotalPlayers())) {
+            throw new RockPaperScissorsSpockLizardException('No players have been added to this game');
         }
         
-        $this->last_play = $move;
+        // if only 1 player has been added, add a computer player
+        if ($this->getTotalPlayers() < 2) {
+            throw new RockPaperScissorsSpockLizardException('This game requires at least 2 players');
+        }
         
-        $this->last_outcome = $this->determineOutcome($play_index);
+        $this->generateMovesForBots();
+        $this->determineOutcome();
         
-        return $this->last_outcome;
+        return $this;
     }
     
-    protected function getPlayIndex($move)
+    /**
+     * Get Move's Index Value
+     * @param $move
+     * @return array|bool
+     */
+    protected function getMoveIndex($move)
     {
-        return array_flip($this->labels[$move]);
+        return array_flip($this->labels)[key($move)];
     }
     
     /**
@@ -186,32 +194,129 @@ class RockPaperScissorsSpockLizard {
      */
     private function generateMove()
     {
-        return $this->outcomes[mt_rand(0, $this->moves_index_end)];
+        return $this->labels[mt_rand(0, $this->moves_index_end)];
     }
     
     /**
+     * Generate Moves For Bots
+     * @return $this
+     */
+    private function generateMovesForBots()
+    {
+        
+        foreach ($this->getPlayers() as &$player) {
+
+            $last_move = $player->getLastMove();
+
+            // generate move for bots
+            if ($player->isBot() && empty($last_move)) {
+                $move = $this->generateMove();
+                $player->move($move);
+            }
+        }
+        
+        return $this;
+    }
+
+    /**
      * Determine Outcome
      * @return string
+     * @throws RockPaperScissorsSpockLizardException
      */
     private function determineOutcome()
     {
-//        // if no opponent parameter, generate move as computer opponent
-//        if (empty($second_move))
-//        {
-//            $opponent_move = $this->generateMove();
-//        }
-//
-//        // compare player with opponent
-//        if (isset($this->outcomes[$player_move][$opponent_move])) {
-//            return $this->last_outcome = 'player';
-//        }
-//
-//        // check opponent against player
-//        if (isset($this->outcomes[$opponent_move][$player_move])) {
-//            return $this->last_outcome = 'opponent';
-//        }
-//
-//        return $this->last_outcome = 'tie';
+        $outcome = [];
+        
+        $players = $this->getPlayers();
+        $opponents = $this->getPlayers();
+        
+        foreach ($players as $player) {
+        
+            foreach ($opponents as $opponent) {
+    
+                // dont play the player against themself
+                if ($player->getId() === $opponent->getId())
+                {
+                    continue;
+                }
+
+                // move collection
+                $player_move = $player->getLastMove();
+                $opponent_move = $opponent->getLastMove();
+
+                // verify moves have been set
+                if (!is_array($player_move)) throw new RockPaperScissorsSpockLizardException($player->getName() . ' has not set a move!');
+                if (!is_array($opponent_move)) throw new RockPaperScissorsSpockLizardException($opponent->getName() . ' has not set a move!');
+
+                // move labels
+                $player_move_label = ucfirst(key($player_move));
+                $opponent_move_label = ucfirst(key($opponent_move));
+
+                // map moves to an index
+                $player_move_index = $this->getMoveIndex($player_move);
+                $opponent_move_index = $this->getMoveIndex($opponent_move);
+
+                // Exceptions
+                if (!is_numeric($player_move_index)) throw new RockPaperScissorsSpockLizardException($player->getName() . ' made an illegal move!');
+                if (!is_numeric($opponent_move_index)) throw new RockPaperScissorsSpockLizardException($opponent->getName() . ' made an illegal move!');
+                if (current($player_move) === true) throw new RockPaperScissorsSpockLizardException($player->getName() . ' has already made this move!');
+                if (current($opponent_move) === true) throw new RockPaperScissorsSpockLizardException($opponent->getName() . ' has already made this move!');
+
+                // compare player with opponent
+                if (isset($this->move_outcomes[$player_move_index][$opponent_move_index])) {
+                    $outcome['winners'][] = [
+                        'player' => $player,
+                        'opponent' => $opponent,
+                        'description' => $player_move_label . ' ' . $this->move_outcomes[$player_move_index][$opponent_move_index] . ' ' . $opponent_move_label
+                    ];
+                    $outcome['losers'][] = [
+                        'player' => $opponent,
+                        'opponent' => $player,
+                        'description' => $player_move_label . ' ' . $this->move_outcomes[$player_move_index][$opponent_move_index] . ' ' . $opponent_move_label
+                    ];
+                } else if (isset($this->move_outcomes[$opponent_move_index][$player_move_index])) {
+                    // dont do anything -- we just need to check this in order to determine whether a tie needs to be calculated
+                } else {
+                    // we just add the tie for the player since the opponent will be added to the ties on later iteration
+                    $outcome['ties'][] = [
+                        'player' => $player,
+                        'opponent' => $opponent,
+                        'description' => 'Both played ' . $player_move_label
+                    ];
+                }
+            }
+        }
+
+        // mark last moves as played
+        foreach ($players as $player) {
+            $player->lastMoveIsPlayed();
+        }
+        
+        $this->setOutcome($outcome);
+        
+        return $this->getRoundOutcome();
+    }
+    
+    /**
+     * Set Outcome
+     * @param $outcome
+     * @return $this
+     */
+    public function setOutcome($outcome)
+    {
+        $this->outcomes[] = $outcome;
+        $this->last_outcome = $outcome;
+        
+        return $this;
+    }
+    
+    /**
+     * Get Round Outcome
+     * @return bool
+     */
+    public function getRoundOutcome()
+    {
+        return $this->last_outcome;
     }
     
     /**
@@ -227,6 +332,9 @@ class RockPaperScissorsSpockLizard {
         if (empty($player->getName())) {
             $player->setName(self::DEFAULT_PLAYER_NAME_PREFIX . ($count + 1)); // we add 1 since $count is an array pointer
         }
+        
+        // we set an id to make it easier to generate results later
+        $player->setId($count + 1);
         
         $this->players[$count] = $player;
         
@@ -259,9 +367,42 @@ class RockPaperScissorsSpockLizard {
         
         return $this;
     }
+
+    /**
+     * Get Round Winners
+     * @return mixed
+     */
+    public function getRoundWinners()
+    {
+        $last_round = $this->getOutcomes();
+        $outcome = end($last_round);
+        return $outcome['winners'];
+    }
+
+    /**
+     * Get Game Winners
+     * @return array
+     */
+    public function getWinners()
+    {
+        $outcomes = $this->getOutcomes();
+
+        foreach ($outcomes as $outcome)
+        {
+            $winners[] = $outcome['winners'];
+        }
+
+        return $winners;
+    }
     
-    public function getRoundWinner() {}
-    public function getWinner() {}
+    /**
+     * Get Outcomes
+     * @return mixed
+     */
+    public function getOutcomes()
+    {
+        return $this->outcomes;
+    }
     
     /**
      * @return bool
@@ -278,7 +419,7 @@ class RockPaperScissorsSpockLizard {
     public function getTotalPlayers()
     {
         $player_count = $this->getPlayers();
-        
+    
         return $player_count === false ? 0 : count($player_count);
     }
 }
