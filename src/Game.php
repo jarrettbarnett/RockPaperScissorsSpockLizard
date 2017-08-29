@@ -206,7 +206,7 @@ class Game {
         
         foreach ($this->getPlayers() as &$player) {
 
-            $last_move = $player->getLastMove();
+            $last_move = $player->getLastMoveIndex();
 
             // generate move for bots
             if ($player->isBot() && empty($last_move)) {
@@ -241,8 +241,8 @@ class Game {
                 }
 
                 // move collection
-                $player_move = $player->getLastMove();
-                $opponent_move = $opponent->getLastMove();
+                $player_move = $player->getLastMoveIndex();
+                $opponent_move = $opponent->getLastMoveIndex();
 
                 // verify moves have been set
                 if (!is_array($player_move)) throw new RockPaperScissorsSpockLizardException($player->getName() . ' has not set a move!');

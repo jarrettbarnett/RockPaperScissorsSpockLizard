@@ -50,7 +50,7 @@ class Player implements PlayerInterface
      */
     public function move($move)
     {
-        $last_move = $this->getLastMove();
+        $last_move = $this->getLastMoveIndex();
         
         if (is_array($last_move) && array_shift($last_move) === false)
         {
@@ -139,7 +139,7 @@ class Player implements PlayerInterface
      * Get Last Move
      * @return mixed
      */
-    public function getLastMove()
+    public function getLastMoveIndex()
     {
         $move_history = $this->getMoveHistory();
 
@@ -150,6 +150,17 @@ class Player implements PlayerInterface
         reset($this->moves);
 
         return $last_move;
+    }
+
+    /**
+     * Get Last Move
+     * @return mixed
+     */
+    public function getLastMove()
+    {
+        $last_move_index = $this->getLastMoveIndex();
+
+        return key($last_move_index);
     }
     
     /**

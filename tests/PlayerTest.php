@@ -23,7 +23,7 @@ class PlayerTest extends TestCase
         $player = new Player();
         $player->move('spock');
         
-        $last_move = $player->getLastMove();
+        $last_move = $player->getLastMoveIndex();
         
         $this->assertEquals('spock', key($last_move), 'Move was not queued!');
     }
@@ -55,12 +55,15 @@ class PlayerTest extends TestCase
         $player = new Player();
         $player->move('rock');
 
-        $last_move = $player->getLastMove();
+        $last_move = $player->getLastMoveIndex();
         $this->assertEquals(false, current($last_move), 'Last move not set correctly');
 
         $player->lastMoveIsPlayed();
-        $last_move = $player->getLastMove();
+        $last_move = $player->getLastMoveIndex();
         $this->assertEquals(true, current($last_move), 'Last move was not marked as played');
+
+        $last_move_label = $player->getLastMove();
+        $this->assertEquals('rock', $last_move_label, 'Last move label is incorrect');
     }
 
     /** @test */
