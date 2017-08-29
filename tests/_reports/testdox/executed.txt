@@ -1,13 +1,15 @@
+RockPaperScissorsSpockLizardTest\Player
+ [x] Can set name via methid
+ [x] Can queue a play
+ [x] Can get move history
+ [x] Cannot set more than one move at a time
+
 RockPaperScissorsSpockLizardTest\RockPaperScissorsSpockLizard
  [x] Can set and get rounds
  [x] Throws exception for bad set round values
  [x] Throws exception for invalid plays
  [x] Exception object output strings
- [x] Can get last play
  [x] Can restart the game
- [x] Can make a play
- [x] Can make a play via magic
- [x] Magic play fails for bad plays
  [x] Exception thrown for set rounds when locked
  [x] Exception thrown for invalid type for set round lock
 

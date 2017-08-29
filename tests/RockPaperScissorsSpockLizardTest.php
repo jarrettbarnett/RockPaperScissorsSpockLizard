@@ -52,17 +52,6 @@ class RockPaperScissorsSpockLizardTest extends TestCase
     
         $this->assertNotEmpty($exception, 'Exception message should not be empty');
     }
-    
-    /** @test */
-    public function can_get_last_play()
-    {
-        $this->game->play('paper');
-        $this->game->play('rock');
-        
-        $last_play = $this->game->getLastPlay();
-        
-        $this->assertEquals('rock', $last_play, 'Last play is invalid');
-    }
 
     /** @test */
     public function can_restart_the_game()
@@ -74,39 +63,6 @@ class RockPaperScissorsSpockLizardTest extends TestCase
 
         $this->game->restart();
         $this->assertEquals(0, $this->game->getRounds(), 'Game returned invalid number of rounds');
-    }
-
-    /** @test */
-    public function can_make_a_play()
-    {
-        $this->game->restart();
-        $this->game->play('spock');
-
-        $last_play = $this->game->getLastPlay();
-
-        $this->assertEquals('spock', $last_play, 'Game returned invalid play for the last play');
-    }
-    
-    /** @test */
-    public function can_make_a_play_via_magic()
-    {
-        $this->game->restart();
-        $this->game->playSpock();
-        
-        $last_play = $this->game->getLastPlay();
-        
-        $this->assertEquals('spock', $last_play, 'Game returned invalid play for last play');
-    }
-    
-    public
-    
-    /** @test */
-    public function cannot_make_a_play_via_bad_magic_method()
-    {
-        $this->game->restart();
-        $name = $this->game->randomMethodName('random');
-        
-        $this->assertEmpty($name);
     }
     
     /** @test */
