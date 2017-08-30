@@ -2,6 +2,7 @@
     "name": "jarrett/rockpaperscissorsspocklizard",
     "description": "Based on a game created by Sam Kass and Karen Bryla and made popular by \"Big Bang Theory\"",
     "type": "library",
+    "license": "GPL-3.0",
     "require-dev": {
         "phpunit/phpunit": "^6.3",
         "phpunit/php-code-coverage": "^5.2",
