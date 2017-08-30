@@ -1,3 +1,6 @@
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/jarrettbarnett/RockPaperScissorsSpockLizard/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/jarrettbarnett/RockPaperScissorsSpockLizard/?branch=master)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/d72809d1-e357-4292-8c18-7e08a526fa42/small.png)](https://insight.sensiolabs.com/projects/d72809d1-e357-4292-8c18-7e08a526fa42)
+
 # RockPaperScissorsSpockLizard Game (in PHP)
 
 A PHP class implementation of Rock Paper Scissors Spock Lizard as created by Sam Kass and Karen Bryla and popularized by "Big Bang Theory."
