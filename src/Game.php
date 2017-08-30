@@ -203,7 +203,6 @@ class Game {
      */
     private function generateMovesForBots()
     {
-        
         foreach ($this->getPlayers() as &$player) {
 
             $last_move = $player->getLastMoveIndex();

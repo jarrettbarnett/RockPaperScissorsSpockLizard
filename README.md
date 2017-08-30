@@ -20,13 +20,14 @@ and require composer autoloader
     $player = new Player();
     $player->move('rock');
     
+    $bot = new Player();
+    $bot->isBot(true);
+    
     $game = new RockPaperScissorsSpockLizard();
-    $game->addPlayer($player)
+    $game->addPlayers($player, $bot)
          ->play();
          
-    $outcome = $game->getOutcome();
-    echo $outcome; // Paper covers Rock
-    
+    $outcome = $game->getOutcomes();    
     
 ### 2 Player Example:
     
@@ -46,9 +47,7 @@ and require composer autoloader
          ->addPlayers($player1, $player2);
          ->play();
     
-    $winner = $game->getWinner();
-    
-    echo $winner->getName();
+    $outcome = $this->getOutcomes()
     
 
 ### Reference:
@@ -102,8 +101,14 @@ Add multiple players to the game.
 #### getPlayers()
 Return players for game.
 
+#### getTotalPlayers()
+Returns the number of players playing
+
 #### getRoundWinner()
 Returns the player who won the last round.
 
-#### getWinner()
+#### getOutcomes()
+Returns the outcomes for all players.
+
+#### getWinners()
 Returns the player who won the game.
