@@ -248,8 +248,13 @@ class Game {
                 $opponent_move = $opponent->getLastMoveIndex();
 
                 // verify moves have been set
-                if (!is_array($player_move)) throw new RockPaperScissorsSpockLizardException($player->getName() . ' has not set a move!');
-                if (!is_array($opponent_move)) throw new RockPaperScissorsSpockLizardException($opponent->getName() . ' has not set a move!');
+                if (!is_array($player_move)) {
+                    throw new RockPaperScissorsSpockLizardException($player->getName() . ' has not set a move!');
+                }
+
+                if (!is_array($opponent_move)) {
+                    throw new RockPaperScissorsSpockLizardException($opponent->getName() . ' has not set a move!');
+                }
 
                 // move labels
                 $player_move_label = ucfirst(key($player_move));
@@ -260,10 +265,21 @@ class Game {
                 $opponent_move_index = $this->getMoveIndex($opponent_move);
 
                 // Exceptions
-                if (!is_numeric($player_move_index)) throw new RockPaperScissorsSpockLizardException($player->getName() . ' made an illegal move!');
-                if (!is_numeric($opponent_move_index)) throw new RockPaperScissorsSpockLizardException($opponent->getName() . ' made an illegal move!');
-                if (current($player_move) === true) throw new RockPaperScissorsSpockLizardException($player->getName() . ' has already made this move!');
-                if (current($opponent_move) === true) throw new RockPaperScissorsSpockLizardException($opponent->getName() . ' has already made this move!');
+                if (!is_numeric($player_move_index)) {
+                    throw new RockPaperScissorsSpockLizardException($player->getName() . ' made an illegal move!');
+                }
+
+                if (!is_numeric($opponent_move_index)) {
+                    throw new RockPaperScissorsSpockLizardException($opponent->getName() . ' made an illegal move!');
+                }
+
+                if (current($player_move) === true) {
+                    throw new RockPaperScissorsSpockLizardException($player->getName() . ' has already made this move!');
+                }
+
+                if (current($opponent_move) === true) {
+                    throw new RockPaperScissorsSpockLizardException($opponent->getName() . ' has already made this move!');
+                }
 
                 // compare player with opponent
                 if (isset($this->move_outcomes[$player_move_index][$opponent_move_index])) {
