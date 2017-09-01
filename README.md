@@ -1,3 +1,4 @@
+[![Build Status](https://scrutinizer-ci.com/g/jarrettbarnett/RockPaperScissorsSpockLizard/badges/build.png?b=master)](https://scrutinizer-ci.com/g/jarrettbarnett/RockPaperScissorsSpockLizard/build-status/master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/jarrettbarnett/RockPaperScissorsSpockLizard/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/jarrettbarnett/RockPaperScissorsSpockLizard/?branch=master)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/d72809d1-e357-4292-8c18-7e08a526fa42/small.png)](https://insight.sensiolabs.com/projects/d72809d1-e357-4292-8c18-7e08a526fa42)
 
