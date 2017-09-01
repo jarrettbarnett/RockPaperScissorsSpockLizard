@@ -219,7 +219,7 @@ class Game {
 
     /**
      * Determine Outcome
-     * @return string or false on failure
+     * @return mixed - array on success or false on failure
      * @throws RockPaperScissorsSpockLizardException
      */
     private function determineOutcome()
@@ -315,7 +315,7 @@ class Game {
     
     /**
      * Get Round Outcome
-     * @return string or bool if no last round outcome
+     * @return mixed string on success, bool if no last round outcome
      */
     public function getRoundOutcome()
     {
@@ -408,7 +408,7 @@ class Game {
     }
     
     /**
-     * @return bool
+     * @return mixed - array of players, false if not set
      */
     public function getPlayers()
     {
