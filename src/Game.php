@@ -154,7 +154,7 @@ class Game {
     
     /**
      * Play Move
-     * @return bool
+     * @return $this
      * @throws \Jarrett\RockPaperScissorsSpockLizardException
      */
     public function play()
@@ -219,7 +219,7 @@ class Game {
 
     /**
      * Determine Outcome
-     * @return string
+     * @return string or false on failure
      * @throws RockPaperScissorsSpockLizardException
      */
     private function determineOutcome()
@@ -227,8 +227,12 @@ class Game {
         $outcome = [];
         
         $players = $this->getPlayers();
-        $opponents = $this->getPlayers();
-        
+        $opponents = $players;
+
+        if ($players === false) {
+            return false;
+        }
+
         foreach ($players as $player) {
         
             foreach ($opponents as $opponent) {
@@ -311,7 +315,7 @@ class Game {
     
     /**
      * Get Round Outcome
-     * @return bool
+     * @return string or bool if no last round outcome
      */
     public function getRoundOutcome()
     {
