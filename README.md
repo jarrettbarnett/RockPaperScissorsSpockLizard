@@ -7,6 +7,8 @@
 
 A PHP class implementation of Rock Paper Scissors Spock Lizard as created by Sam Kass and Karen Bryla and popularized by "Big Bang Theory."
 
+Add as many players (or bots) as you want and play them all against each other at the same time!
+
 Install via composer:
 
     composer install jarrett/rockpaperscissorsspocklizard
@@ -54,8 +56,40 @@ and require composer autoloader
     
     $outcome = $this->getOutcomes()
     
+### 5 Player Example:
+    
+    use Jarrett\RockPaperScissorsSpockLizard;
+    use Jarrett\RockPaperScissorsSpockLizard\Player;
+    
+    // ...
+    
+    // human
+    $player1 = new Player();
+    $player1->move('rock');
+    
+    // human
+    $player2 = new Player();
+    $player2->move('paper');
+    
+    // and 3 bots
+    $player3 = new Player();
+    $player4 = new Player();
+    $player5 = new Player();
+    
+    $game = new RockpaperScissorsSpockLizard();
+    $game->addPlayers($player1, $player2, $player3, $player4, $player5)
+         ->play();
+    
+    // returns an array containing all wins, ties, and losses
+    $outcomes = $this->getOutcomes()
+    
+... or just throw the player instantiation directly into the addPlayers() method
 
-### Reference:
+    $game = new RockpaperScissorsSpockLizard();
+    $game->addPlayers($player1, $player2, (new Player), (new Player), (new Player))
+             ->play();
+
+### Class Method Reference:
 
 ## Player( _string_ $player_name )
 
