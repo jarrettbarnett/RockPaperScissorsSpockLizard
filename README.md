@@ -7,7 +7,7 @@
 
 A PHP class implementation of Rock Paper Scissors Spock Lizard as created by Sam Kass and Karen Bryla and popularized by "Big Bang Theory."
 
-Add as many players (or bots) as you want and play them all against each other at the same time!
+**Add as many players (or bots) as you want. Then play them all against each other at the same time!**
 
 Packagist can be found here: [jarrett/rockpaperscissorsspocklizard](https://packagist.org/packages/jarrett/rockpaperscissorsspocklizard)
 
